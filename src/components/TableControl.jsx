@@ -1,17 +1,7 @@
-import React, { useState, useEffect } from "react";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import {
-  ButtonGroup,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Pagination,
-  Select,
-  TableHead,
-  Typography,
-  Grid,
-} from "@mui/material";
+import React from "react";
+import { Grid } from "@mui/material";
+import SelectField from "./SelectField";
+import OrderButton from "./OrderButton";
 
 export default function TableControl({
   tagsPerPage,
@@ -34,74 +24,39 @@ export default function TableControl({
       spacing={2}
     >
       <Grid item>
-        <InputLabel id="view" sx={{ fontSize: 14 }}>
-          view
-        </InputLabel>
-        <Select
-          labelId="view"
+        <SelectField
+          name="view"
           variant="standard"
           value={tagsPerPage}
+          width={45}
           onChange={(e) => {
             setTagsPerPage(e.target.value);
             setPage(1);
           }}
-        >
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={10}>10</MenuItem>
-          <MenuItem value={12}>20</MenuItem>
-        </Select>
+          options={[5, 10, 16]}
+        />
       </Grid>
       <Grid item>
-        <InputLabel id="sortBy" sx={{ fontSize: 14 }}>
-          sort
-        </InputLabel>
-        <Select
-          labelId="sortBy"
+        <SelectField
+          name="sort"
           variant="standard"
           value={sortBy}
+          width={80}
           onChange={(e) => {
             setSortBy(e.target.value);
             setPage(1);
           }}
-        >
-          <MenuItem value={"popular"}>popular</MenuItem>
-          <MenuItem value={"activity"}>activity</MenuItem>
-          <MenuItem value={"name"}>name</MenuItem>
-        </Select>
+          options={["popular", "activity", "name"]}
+        />
       </Grid>
       <Grid item sx={{ display: "flex", alignItems: "flex-end", padding: 0 }}>
-        <ButtonGroup
-          orientation="vertical"
-          sx={{
-            border: "1px solid rgb(94, 132, 194, 0.3)",
-            paddingX: 0.5,
+        <OrderButton
+          onClick={(order) => {
+            setSortOrder(order);
+            setPage(1);
           }}
-        >
-          <IconButton
-            sx={{ padding: 0 }}
-            onClick={() => {
-              setSortOrder("asc");
-              setPage(1);
-            }}
-          >
-            <ArrowDropUpIcon
-              color={sortOrder === "desc" ? "disabled" : ""}
-              fontSize="small"
-            />
-          </IconButton>
-          <IconButton
-            sx={{ padding: 0 }}
-            onClick={() => {
-              setSortOrder("desc");
-              setPage(1);
-            }}
-          >
-            <ArrowDropDownIcon
-              color={sortOrder === "asc" ? "disabled" : ""}
-              fontSize="small"
-            />
-          </IconButton>
-        </ButtonGroup>
+          sortOrder={sortOrder}
+        />
       </Grid>
     </Grid>
   );
