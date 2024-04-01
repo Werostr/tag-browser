@@ -3,7 +3,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { ButtonGroup, IconButton } from "@mui/material";
 import { PropTypes } from "prop-types";
 
-export default function OrderButton({ onClick, sortOrder }) {
+export default function OrderButton({ onClick, sortOrder, disabled }) {
   return (
     <ButtonGroup
       orientation="vertical"
@@ -12,13 +12,21 @@ export default function OrderButton({ onClick, sortOrder }) {
         paddingX: 0.5,
       }}
     >
-      <IconButton sx={{ padding: 0 }} onClick={() => onClick("asc")}>
+      <IconButton
+        sx={{ padding: 0 }}
+        onClick={() => onClick("asc")}
+        disabled={disabled}
+      >
         <ArrowDropUpIcon
           color={sortOrder === "desc" ? "disabled" : ""}
           fontSize="small"
         />
       </IconButton>
-      <IconButton sx={{ padding: 0 }} onClick={() => onClick("desc")}>
+      <IconButton
+        sx={{ padding: 0 }}
+        onClick={() => onClick("desc")}
+        disabled={disabled}
+      >
         <ArrowDropDownIcon
           color={sortOrder === "asc" ? "disabled" : ""}
           fontSize="small"
@@ -31,8 +39,10 @@ export default function OrderButton({ onClick, sortOrder }) {
 OrderButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   sortOrder: PropTypes.oneOf(["desc", "asc"]).isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 OrderButton.defaultProps = {
   sortOrder: "desc",
+  disabled: false,
 };

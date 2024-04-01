@@ -25,7 +25,11 @@ export default function DataTableBody({
             )
           : tags
         ).map((tag) => (
-          <DataTableRow key={tag.name} cells={[tag.name, tag.count]} />
+          <DataTableRow
+            key={tag.name}
+            cells={[tag.name, tag.count]}
+            hover="true"
+          />
         ))}
       {tags.length > tagsPerPage && emptyRows > 0 && (
         <DataTableRow colSpan={2} height={53 * emptyRows} />
@@ -69,7 +73,7 @@ DataTableBody.defaultProps = {
   backgroundColor: "rgb(94, 132, 194,0.7)",
   page: 1,
   tagsPerPage: 5,
-  tags: [{ name: "dde", count: 2 }],
+  tags: [],
   loading: true,
   error: false,
 };

@@ -11,6 +11,23 @@ export default {
   },
 };
 
-const Template = (args) => <OrderButton {...args} />;
+//const Template = (args) => <OrderButton {...args} />;
 
-export const Default = Template.bind({});
+//export const DescOrder = Template.bind({ sortOrder: "desc" });
+export const DescOrder = {
+  args: {
+    sortOrder: "desc",
+  },
+};
+
+export const AscOrder = {
+  args: {
+    sortOrder: "asc",
+  },
+};
+
+export const Disabled = {
+  args: {
+    disabled: true,
+  },
+};

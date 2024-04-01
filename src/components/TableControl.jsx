@@ -12,6 +12,7 @@ export default function TableControl({
   setTagsPerPage,
   setSortBy,
   setSortOrder,
+  disabled,
 }) {
   return (
     <Grid
@@ -35,6 +36,7 @@ export default function TableControl({
             setPage(1);
           }}
           options={[5, 10, 16]}
+          disabled={disabled}
         />
       </Grid>
       <Grid item>
@@ -48,6 +50,7 @@ export default function TableControl({
             setPage(1);
           }}
           options={["popular", "activity", "name"]}
+          disabled={disabled}
         />
       </Grid>
       <Grid item sx={{ display: "flex", alignItems: "flex-end", padding: 0 }}>
@@ -57,6 +60,7 @@ export default function TableControl({
             setPage(1);
           }}
           sortOrder={sortOrder}
+          disabled={disabled}
         />
       </Grid>
     </Grid>
@@ -71,6 +75,7 @@ TableControl.propTypes = {
   setTagsPerPage: PropTypes.func.isRequired,
   setSortBy: PropTypes.func.isRequired,
   setSortOrder: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 TableControl.defaultProps = {

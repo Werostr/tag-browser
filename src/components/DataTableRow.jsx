@@ -7,9 +7,10 @@ export default function DataTableRow({
   component,
   colSpan,
   height = 53,
+  hover,
 }) {
   return (
-    <TableRow sx={{ height: height }}>
+    <TableRow sx={{ height: height }} hover={hover}>
       {cells &&
         cells.map((cell) => (
           <TableCell
@@ -27,10 +28,11 @@ export default function DataTableRow({
 }
 
 DataTableRow.propTypes = {
-  cells: PropTypes.arrayOf(PropTypes.string),
+  cells: PropTypes.arrayOf(PropTypes.string).isRequired,
   component: PropTypes.node,
   colSpan: PropTypes.number,
   height: PropTypes.number,
+  hover: PropTypes.bool,
 };
 
 DataTableRow.defaultProps = {

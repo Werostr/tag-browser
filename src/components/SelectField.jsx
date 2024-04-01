@@ -4,16 +4,16 @@ import { PropTypes } from "prop-types";
 
 export default function SelectField({
   fieldName,
-  //nameSize, 14
   variant,
   value,
   width,
   onChange,
   options,
+  disabled,
 }) {
   return (
     <>
-      <InputLabel id={fieldName} sx={{ fontSize: 14 }}>
+      <InputLabel id={fieldName} sx={{ fontSize: 14 }} disabled={disabled}>
         {fieldName}
       </InputLabel>
       <Select
@@ -22,6 +22,7 @@ export default function SelectField({
         value={value}
         sx={{ width: width }}
         onChange={onChange}
+        disabled={disabled}
       >
         {options &&
           options.map((option) => (
@@ -43,8 +44,10 @@ SelectField.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ).isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 SelectField.defaultProps = {
   variant: "standard",
+  disabled: false,
 };

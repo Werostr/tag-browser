@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Table, TableContainer, Paper } from "@mui/material";
-
 import DataTableHead from "./DataTableHead";
 import DataTableBody from "./DataTableBody";
-import axios from "axios";
 import DataTableFooter from "./DataTableFooter";
 import { PropTypes } from "prop-types";
 
@@ -11,34 +9,10 @@ export default function DataTable({
   page,
   tagsPerPage,
   setPage,
-  sortBy,
-  sortOrder,
+  tags,
+  loading,
+  error,
 }) {
-  const [tags, setTags] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const fetchTags = async () => {
-      try {
-        setLoading(true);
-        setError(false);
-        const response = await axios.get(
-          `https://api.stackexchange.com/2.3/tags?order=${sortOrder}&sort=${sortBy}&site=stackoverflow`
-        );
-        setTags(response.data.items);
-        setLoading(false);
-        setError(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-        setError(true);
-      }
-    };
-
-    fetchTags();
-  }, [sortBy, sortOrder]);
-
   const pagesNumber = useMemo(() => {
     return Math.ceil(tags.length / tagsPerPage);
   }, [tagsPerPage, tags]);
@@ -72,6 +46,9 @@ DataTable.propTypes = {
   setPage: PropTypes.func.isRequired,
   sortBy: PropTypes.oneOf(["popular", "activity", "name"]).isRequired,
   sortOrder: PropTypes.oneOf(["desc", "asc"]).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
 DataTable.defaultProps = {
@@ -79,4 +56,7 @@ DataTable.defaultProps = {
   tagsPerPage: 5,
   sortBy: "popular",
   sortOrder: "desc",
+  tags: [],
+  loading: true,
+  error: false,
 };
