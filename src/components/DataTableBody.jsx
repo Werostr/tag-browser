@@ -1,6 +1,7 @@
 import DataTableRow from "./DataTableRow";
 import React from "react";
 import { Typography, TableBody } from "@mui/material";
+import { PropTypes } from "prop-types";
 
 export default function DataTableBody({
   backgroundColor,
@@ -16,7 +17,8 @@ export default function DataTableBody({
   return (
     <TableBody sx={{ backgroundColor: backgroundColor }}>
       {!loading &&
-        (tagsPerPage > 0
+        !error &&
+        (tagsPerPage > 0 && tags
           ? tags.slice(
               (page - 1) * tagsPerPage,
               (page - 1) * tagsPerPage + tagsPerPage
@@ -53,3 +55,21 @@ export default function DataTableBody({
     </TableBody>
   );
 }
+
+DataTableBody.propTypes = {
+  backgroundColor: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+  tagsPerPage: PropTypes.oneOf([5, 10, 16]).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+};
+
+DataTableBody.defaultProps = {
+  backgroundColor: "rgb(94, 132, 194,0.7)",
+  page: 1,
+  tagsPerPage: 5,
+  tags: [{ name: "dde", count: 2 }],
+  loading: true,
+  error: false,
+};

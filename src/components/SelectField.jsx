@@ -1,8 +1,9 @@
 import React from "react";
 import { InputLabel, MenuItem, Select } from "@mui/material";
+import { PropTypes } from "prop-types";
 
 export default function SelectField({
-  name,
+  fieldName,
   //nameSize, 14
   variant,
   value,
@@ -12,11 +13,11 @@ export default function SelectField({
 }) {
   return (
     <>
-      <InputLabel id={name} sx={{ fontSize: 14 }}>
-        {name}
+      <InputLabel id={fieldName} sx={{ fontSize: 14 }}>
+        {fieldName}
       </InputLabel>
       <Select
-        labelId={name}
+        labelId={fieldName}
         variant={variant}
         value={value}
         sx={{ width: width }}
@@ -32,3 +33,18 @@ export default function SelectField({
     </>
   );
 }
+
+SelectField.propTypes = {
+  fieldName: PropTypes.string.isRequired,
+  variant: PropTypes.oneOf(["filled", "outlined", "standard"]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  width: PropTypes.number,
+  onChange: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ).isRequired,
+};
+
+SelectField.defaultProps = {
+  variant: "standard",
+};

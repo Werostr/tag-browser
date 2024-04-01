@@ -1,5 +1,6 @@
 import React from "react";
 import { TableCell, TableRow } from "@mui/material";
+import { PropTypes } from "prop-types";
 
 export default function DataTableRow({
   cells = [""],
@@ -24,3 +25,15 @@ export default function DataTableRow({
     </TableRow>
   );
 }
+
+DataTableRow.propTypes = {
+  cells: PropTypes.arrayOf(PropTypes.string),
+  component: PropTypes.node,
+  colSpan: PropTypes.number,
+  height: PropTypes.number,
+};
+
+DataTableRow.defaultProps = {
+  cells: [""],
+  height: 53,
+};

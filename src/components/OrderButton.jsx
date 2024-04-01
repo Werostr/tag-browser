@@ -1,6 +1,7 @@
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { ButtonGroup, IconButton } from "@mui/material";
+import { PropTypes } from "prop-types";
 
 export default function OrderButton({ onClick, sortOrder }) {
   return (
@@ -26,3 +27,12 @@ export default function OrderButton({ onClick, sortOrder }) {
     </ButtonGroup>
   );
 }
+
+OrderButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  sortOrder: PropTypes.oneOf(["desc", "asc"]).isRequired,
+};
+
+OrderButton.defaultProps = {
+  sortOrder: "desc",
+};

@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
-import {
-  //Pagination,
-  Table,
-  TableContainer,
-  //TableFooter,
-  Paper,
-} from "@mui/material";
+import { Table, TableContainer, Paper } from "@mui/material";
 
-// import DataTableRow from "./DataTableRow";
 import DataTableHead from "./DataTableHead";
 import DataTableBody from "./DataTableBody";
 import axios from "axios";
 import DataTableFooter from "./DataTableFooter";
+import { PropTypes } from "prop-types";
 
 export default function DataTable({
   page,
@@ -54,7 +48,7 @@ export default function DataTable({
       <Table sx={{ minWidth: 500 }}>
         <DataTableHead backgroundColor="rgb(94, 132, 194,0.7)" />
         <DataTableBody
-          backgroundColor={"rgb(94, 132, 194,0.5)"}
+          backgroundColor="rgb(94, 132, 194,0.5)"
           page={page}
           tags={tags}
           tagsPerPage={tagsPerPage}
@@ -65,8 +59,24 @@ export default function DataTable({
           page={page}
           setPage={setPage}
           pagesNumber={pagesNumber}
+          backgroundColor="rgb(94, 132, 194,0.53)"
         />
       </Table>
     </TableContainer>
   );
 }
+
+DataTable.propTypes = {
+  page: PropTypes.number.isRequired,
+  tagsPerPage: PropTypes.oneOf([5, 10, 16]).isRequired,
+  setPage: PropTypes.func.isRequired,
+  sortBy: PropTypes.oneOf(["popular", "activity", "name"]).isRequired,
+  sortOrder: PropTypes.oneOf(["desc", "asc"]).isRequired,
+};
+
+DataTable.defaultProps = {
+  page: 1,
+  tagsPerPage: 5,
+  sortBy: "popular",
+  sortOrder: "desc",
+};

@@ -4,6 +4,9 @@ export default {
   title: "App/SelectField",
   component: SelectField,
   tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
 };
 
 const Template = (args) => <SelectField {...args} />;

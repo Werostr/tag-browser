@@ -1,5 +1,6 @@
 import DataTableRow from "./DataTableRow";
 import { Pagination, TableFooter } from "@mui/material";
+import { PropTypes } from "prop-types";
 
 export default function DataTableFooter({
   backgroundColor,
@@ -8,7 +9,7 @@ export default function DataTableFooter({
   pagesNumber,
 }) {
   return (
-    <TableFooter sx={{ backgroundColor: "rgb(94, 132, 194,0.53)" }}>
+    <TableFooter sx={{ backgroundColor: backgroundColor }}>
       <DataTableRow
         colSpan={2}
         component={
@@ -26,3 +27,15 @@ export default function DataTableFooter({
     </TableFooter>
   );
 }
+
+DataTableFooter.propTypes = {
+  backgroundColor: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
+  pagesNumber: PropTypes.number.isRequired,
+};
+
+DataTableFooter.defaultProps = {
+  backgroundColor: "rgb(94, 132, 194,0.53)",
+  page: 1,
+};

@@ -4,6 +4,9 @@ export default {
   title: "App/DataTableRow",
   component: DataTableRow,
   tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
 };
 
 const Template = (args) => <DataTableRow {...args} />;

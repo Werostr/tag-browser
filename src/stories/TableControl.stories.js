@@ -1,11 +1,16 @@
 import TableControl from "../components/TableControl";
+import { fn } from "@storybook/test";
 
 export default {
   title: "App/TableControl",
   component: TableControl,
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  args: {
+    setTagsPerPage: fn(),
+    setSortBy: fn(),
+    setSortOrder: fn(),
+    setPage: fn(),
+  },
 };
 
 const Template = (args) => <TableControl {...args} />;
